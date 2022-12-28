@@ -8,6 +8,11 @@ route.get("/categories", async (req, res)=>{
 });
 
 
+route.get("/:ctg", async (req, res)=>{
+
+    const getData = await Gallery.find({Category: {$in: [req.params.ctg]}}).limit(4)
+    res.send(getData);      
+})
 
 module.exports = route;
 
