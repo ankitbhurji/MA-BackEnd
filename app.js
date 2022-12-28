@@ -27,6 +27,14 @@ app.post("/health", (_, res)=>{
     });
 });
 
+app.use((req, res, next)=>{
+    res.status(404).send("enter valid url")
+});
+
+app.use((err, req, res, next)=>{
+    res.status(500).send("Something went wrong! Please try after some time.")
+});
+
 
 const PORT = process.env.PORT;
 const HOST = process.env.HOST;
