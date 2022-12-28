@@ -16,7 +16,6 @@ route.post("/category/:ctg", (req, res)=>{
     
 });
 
-
 route.get("/images", (req, res)=>{
     const gallery = new Gallery({
         Name: req.body.Name, 

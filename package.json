@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/ankitbhurji/MA-BackEnd#readme",
   "dependencies": {
+    "cores": "^0.8.5",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.8.1"
