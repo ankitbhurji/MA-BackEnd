@@ -28,7 +28,7 @@ app.post("/health", (_, res)=>{
 });
 
 app.use((req, res, next)=>{
-    res.status(404).send("enter valid url")
+    res.status(404).send("Please enter valid Url.")
 });
 
 app.use((err, req, res, next)=>{
