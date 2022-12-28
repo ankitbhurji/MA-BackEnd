@@ -7,12 +7,13 @@ route.get("/categories", async (req, res)=>{
     res.send(data); 
 });
 
-route.get("/:ctg", async (req, res)=>{
+route.get("/:ctg/:shuffle", async (req, res)=>{
 
     var filter = {}
     if(req.query.filterByLike=="true"){
         filter = {Like: 1}
     }
+
 
 
     CreateKey = 1;  
@@ -24,9 +25,17 @@ route.get("/:ctg", async (req, res)=>{
         }
     }
 
-   
+    // var SkipKey;
+    // if(req.params.shuffle == 1){
+    //     SkipKey = 1
+    // }else if(req.params.shuffle == 0){
+    //     SkipKey = 0
+    // }
 
-    const getData = await Gallery.find({Category: {$in: [req.params.ctg]}, ...filter}).sort({CreatedAt: CreateKey}).limit(4)
+    var SkipKey = req.params.shuffle;
+    
+
+    const getData = await Gallery.find({Category: {$in: [req.params.ctg]}, ...filter}).sort({CreatedAt: CreateKey}).skip(SkipKey).limit(4)
     res.send(getData);      
 })
 
