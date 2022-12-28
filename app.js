@@ -6,13 +6,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 const CONNECTION = require("./DataBase/Db");
 CONNECTION();   
 
+const ADMIN = require("./routes/Admin");
 
 
 
 
-
-
-
+app.use("/api/admin", ADMIN);
 
 
 
