@@ -7,6 +7,7 @@ const CONNECTION = require("./DataBase/Db");
 CONNECTION();   
 
 const ADMIN = require("./routes/Admin");
+const DISCOVER = require("./routes/Discover");
 
 
 
@@ -14,6 +15,7 @@ const ADMIN = require("./routes/Admin");
 
 
 app.use("/api/admin", ADMIN);
+app.use("/api/discover", DISCOVER);
 
 
 
