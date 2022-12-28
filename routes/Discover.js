@@ -1,11 +1,48 @@
 const express = require("express");
 const route = express.Router();
+const Gallery = require("../model/GallerySchema")
 const Category = require("../model/CategorySchema")
 
 route.get("/categories", async (req, res)=>{
     const data = await Category.find();
     res.send(data); 
 });
+
+route.get("/gallery", async(req, res)=>{
+    const data = await Category.find();
+    res.send(data);
+});
+
+
+route.get("/like/:imgID", async (req, res)=>{
+
+    // var LikesValue;
+    // Gallery.findOne({_id:req.params.imgID}, (err, getData)=>{
+       
+    //     // if(getData.Like){
+    //     //     LikesValue = 1
+    //     // }else{
+    //     //     LikesValue = 0
+    //     // }
+    //     // console.log(getData.Like);
+    //     LikesValue = 30
+    // });
+
+    var LikesValue;
+    const getData = await Gallery.findOne({_id: req.params.imgID});
+    // console.log(getData.Like)
+    if(getData.Like){
+        LikesValue = 0
+    }else{
+        LikesValue = 1
+    }
+    const setData = await Gallery.updateOne({_id: req.params.imgID}, {$set: {Like: LikesValue}});
+    
+    
+    res.send(setData);
+})
+
+
 
 route.get("/:ctg/:shuffle", async (req, res)=>{
 
@@ -38,6 +75,7 @@ route.get("/:ctg/:shuffle", async (req, res)=>{
     const getData = await Gallery.find({Category: {$in: [req.params.ctg]}, ...filter}).sort({CreatedAt: CreateKey}).skip(SkipKey).limit(4)
     res.send(getData);      
 })
+
 
 module.exports = route;
 
